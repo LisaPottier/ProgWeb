@@ -8,4 +8,4 @@ Calendrier avec la possibilité de mettre une recette par repas
 -> generation d'une liste de course
 -> generation liste de ce qu'on a dans notre frigo avec les elements cochés
 	(ajout possible de ce qu'on a en plus des recettes) 
-		=>proposition d'autres recettes avec ces ingerdients  
+		=>proposition d'autres recettes avec ces ingerdients

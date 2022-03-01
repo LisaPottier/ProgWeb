@@ -8,12 +8,11 @@
 </template>
 
 <script>
-import ingredient from '@/Ingredient'
+//import ingredient from './Ingredient.vue'
 export default {
   name: 'list-ingredients',
-	props: {
-        ingredient1 : ingredient,
-        ingredient2 : ingredient,
+	props: {//à transformer en liste de taille modifiable
+        listIngredients : []
   }
 }
 </script>

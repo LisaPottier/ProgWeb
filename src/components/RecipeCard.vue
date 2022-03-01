@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import Ingredients from '@/ListIngredients'
+import ListIngredients from './ListIngredients.vue'
 export default {
   name: 'recipe-card',
 	props: {
 		name: {type: String, required: true},
 		cuisine: String, 
-        diet : String,
-        time : String,
-        ingredients : Ingredients,//a faire
-        wine : String,
+    diet : String,
+    time : String,
+    ingredients : ListIngredients,
+    wine : String,
 		pictureUrl: {type: String, default:require("../assets/recette.jpg")}
 	}
 }
