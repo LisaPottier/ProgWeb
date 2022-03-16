@@ -1,12 +1,24 @@
 <template>
   <div id="recipes-gallery">
-    <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
-  <RecipeCard 
-      v-for="recipe in recipeData"
-      :key="recipe.id"
-      :name="recipe.title"
-      :pictureUrl="recipe.image"/>
+    <div class="gallery-options">
+      <input type="text" v-model="search" placeholder="Chercher une recette">
+
+		<label for="dog-sort">Trier par : </label>
+		<select v-model="dogsSortType" id="dog-sort">
+        <option value="AZName">Noms de A à Z</option>
+        <option value="ZAName">Noms de Z à A</option>
+        <option value="AZBreed">Espèces de A à Z</option>
+        <option value="ZABreed">Espèces de Z à A</option>
+				</select>
+    </div>
+    <div class="gallery">
+      <RecipeCard
+        v-for="recipe in recipeData"
+          :key="recipe.id"
+          :name="recipe.title"
+          :pictureUrl="recipe.image"
+          :id="recipe.id"/>
+    </div>
   </div>
 </template>
 
@@ -14,7 +26,7 @@
 //import HelloWorld from './components/HelloWorld.vue'
 import RecipeCard from './components/RecipeCard.vue'
 import {getRecipeDataByName} from './services/api/spoonicularAPI.js'
-
+//key = a5ac1bab04ea47ed90a7851e998c7660
 
 export default {
   name: 'RecipesGallery',
@@ -24,16 +36,24 @@ export default {
   data() {
     return {
       recipeData: [],
+      search :""
     }
   },
   created: function(){
-    this.retrieveRecipeData("pasta");
+    this.retrieveRecipeData("pasta tuna");
   },
-    methods: {
-            async retrieveRecipeData(recipeName) {
-                    this.recipeData = await getRecipeDataByName(recipeName);
-                    console.log(this.recipeData[0])
+  methods: {
+    
+          async retrieveRecipeData(recipeName) {
+            try {
+               this.recipeData = await getRecipeDataByName(recipeName);
+              
+            } catch (error) {
+              alert("Trop de requêtes")
+              
             }
+                 
+          }
     }
 }
 </script>
@@ -46,6 +66,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.gallery{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
 }
 </style>
 
