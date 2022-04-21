@@ -18,7 +18,7 @@ export default {
   },
 	props: {
 		name: {type: String, required:true},
-		pictureUrl: {type: String, default:require("../assets/recette.jpg")},
+		pictureUrl: {type: String, default:require("../assets/image-coming-soon.jpg")},
     id : {required:true},
 	},
   data() {
@@ -45,6 +45,11 @@ export default {
 
 <style scoped>
 .recipe-card{
-  width: 50%;
+  width: 35vw;
+  margin: 5vw;
+}
+.recipe-card img{
+   object-fit: cover;
+   width: 80%;
 }
 </style>
