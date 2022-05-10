@@ -2,8 +2,8 @@
     <div id="gallery-option">
         <div class ="sort-type-selection">
             <label for="recipe-sort"> Trier par : </label>
-            <select v-on:change="emitModifyRecipeSortType" 
-              :value="recipeSortType">
+            <select v-on:change="emitModifySortType" 
+              :value="sortType">
                 <option value="AZName">Noms de A à Z</option>
                 <option value="ZAName">Noms de Z à A</option>
             </select>
@@ -20,17 +20,16 @@
 </template>
 
 <script>
-
 export default {
   name: 'gallery-option',
   props :{
     search : String,
-    recipeSortType : String,
+    sortType : String,
   },
   methods: {
     //getter to use the parameter in the recipe-gallery component
-    emitModifyRecipeSortType : function(event) {
-      this.$emit("emitedRecipeSortType",event.target.value)
+    emitModifySortType : function(event) {
+      this.$emit("emitedSortType",event.target.value)
       console.log(event.target.value)
     },
     emitModifySearch : function(event) {

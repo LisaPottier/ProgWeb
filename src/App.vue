@@ -4,11 +4,12 @@
       <OptionGallery 
         :search = "search"
             v-on:emitedSearch = "retrieveRecipeSearch"
-        :recipeSortType = "recipeSortType"
-            v-on:emitedRecipeSortType = "retrieveSortedData"
+        :sortType = "sortType"
+            v-on:emitedSortType = "retrieveSortedData"
       />
     </div>
     <div class="gallery">
+      <ErrorMessage v-if="sortRecipeData.length==0"/>
       <RecipeCard
         v-for="recipe in sortRecipeData"
           :key="recipe.id"
@@ -24,6 +25,7 @@
 <script>
   import RecipeCard from './components/RecipeCard.vue'
   import OptionGallery from './components/SearchBar.vue'
+  import ErrorMessage from './components/ErrorMessage.vue'
   import {getRecipeDataByName} from './services/api/spoonicularAPI.js'
 
   export default {
@@ -35,14 +37,15 @@
 
     components: {
       RecipeCard,
-      OptionGallery
+      OptionGallery,
+      ErrorMessage
       },
 
     data() {
       return {
         recipesData: [],
         search : localStorage.getItem("search") || "",
-        recipeSortType : localStorage.getItem("recipeSortType") || "AZName"
+        sortType : localStorage.getItem("sortType") || "AZName"
       }
     },
 
@@ -50,16 +53,15 @@
       search: function(newSearch){
         localStorage.setItem("search",newSearch)},
 
-      recipeSortType: function(newRecipeSortType){
-        localStorage.setItem("recipeSortType",newRecipeSortType)
+      sortType: function(newSortType){
+        localStorage.setItem("sortType",newSortType)
       }
     },
     computed:
     {
       sortRecipeData: function() {
-        //const field = ["AZName", "ZAName"].includes( this.recipeSortType) ? "name" :""
-        const reversed =["ZAName"].includes(this.recipeSortType)
-        console.log("sort :" + this.recipeSortType)
+        const reversed =["ZAName"].includes(this.sortType)
+        console.log("sort :" + this.sortType)
         const comparator = (a, b) => (a.title).localeCompare(b.title)
         let data = this.recipesData
         data = data.sort(comparator)
@@ -85,9 +87,9 @@
                 alert("Trop de requêtes")
               }       
             },
-            retrieveSortedData(sortType){
+            retrieveSortedData(newSortType){
               this.recipesData = this.sortRecipeData;
-              this.recipeSortType=sortType;
+              this.sortType=newSortType;
             },
 
             displaySearchedRecipes : function(name) {
@@ -103,6 +105,8 @@
     background-color: #ffd085;
     margin: 0;
     padding: 0;
+    width : 100%;
+    height: 100%;
   }
 
   #recipes-gallery {
@@ -116,6 +120,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
   }
 
 </style>
