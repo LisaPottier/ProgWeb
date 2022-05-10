@@ -17,8 +17,6 @@ const getRecipeDataByName =
       if (response.status == 200) {
         isWorking=true;
         const data = await response.json()
-        console.log("entrée dans le status ok")
-        console.log(data.results)
         return data.results
       } 
     }
@@ -40,8 +38,6 @@ const getRecipeInfoById =
     if (response.status == 200) {
       isWorking=true;
       const data = await response.json()
-      console.log("entrée dans le status ok")
-      console.log(data)
       return data
     }
   }

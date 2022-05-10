@@ -3,9 +3,9 @@
     <div class="gallery-options">
       <OptionGallery 
         :search = "search"
-            v-on:emitedSearch = "retrieveRecipeData"
+            v-on:emitedSearch = "retrieveRecipeSearch"
         :recipeSortType = "recipeSortType"
-            v-on:sortRecipeData="sortRecipeData"
+            v-on:emitedRecipeSortType = "retrieveSortedData"
       />
     </div>
     <div class="gallery">
@@ -30,7 +30,7 @@
     name: 'RecipesGallery',
 
     created: function(){
-      this.retrieveRecipeData(this.search);
+      this.retrieveRecipeSearch(this.search);
     },
 
     components: {
@@ -41,7 +41,7 @@
     data() {
       return {
         recipesData: [],
-        search : localStorage.getItem("search") || "pasta",
+        search : localStorage.getItem("search") || "",
         recipeSortType : localStorage.getItem("recipeSortType") || "AZName"
       }
     },
@@ -58,14 +58,16 @@
     {
       sortRecipeData: function() {
         //const field = ["AZName", "ZAName"].includes( this.recipeSortType) ? "name" :""
-        const reversed = ["ZAName"].includes(this.recipeSortType)
-        console.dir(this.recipesData)
+        const reversed =["ZAName"].includes(this.recipeSortType)
+        console.log("sort :" + this.recipeSortType)
         const comparator = (a, b) => (a.title).localeCompare(b.title)
         let data = this.recipesData
         data = data.sort(comparator)
         if (reversed) data = data.reverse()
+        console.log("is reversed :" + reversed)
         console.log("data :")
         console.dir(data)
+
         return data
       },
     },
@@ -73,7 +75,7 @@
     
     methods: {
       
-            async retrieveRecipeData(recipeName) {
+            async retrieveRecipeSearch(recipeName) {
               try {
                 console.log("recipe name is ..."+ recipeName)
                 this.recipesData = await getRecipeDataByName(recipeName);
@@ -83,24 +85,10 @@
                 alert("Trop de requêtes")
               }       
             },
-
-            /* async sortRecipeData(newRecipeSortType) {
-              try {
-                console.log("type of sort is ..."+ newRecipeSortType)
-                const reversed = ["ZAName"].includes(newRecipeSortType)
-                console.dir(this.recipesData)
-                const comparator = (a, b) => (a.title).localeCompare(b.title)
-                if (reversed) {
-                this.recipesData = await this.recipesData.sort(comparator).reverse();
-                }
-                else {
-                  this.recipesData = await this.recipesData.sort(comparator);
-                }
-                
-              } catch (error) {
-                alert("Problème dans le tri")
-              }       
-            },*/
+            retrieveSortedData(sortType){
+              this.recipesData = this.sortRecipeData;
+              this.recipeSortType=sortType;
+            },
 
             displaySearchedRecipes : function(name) {
               this.search=name

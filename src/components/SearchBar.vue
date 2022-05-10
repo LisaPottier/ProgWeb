@@ -1,8 +1,9 @@
 <template>
     <div id="gallery-option">
         <div class ="sort-type-selection">
-            <label for="recipe-sort">Trier par : </label>
-            <select :value="recipeSortType" @input="emitModifyRecipeSortType" id="recipe-sort">
+            <label for="recipe-sort"> Trier par : </label>
+            <select v-on:change="emitModifyRecipeSortType" 
+              :value="recipeSortType">
                 <option value="AZName">Noms de A à Z</option>
                 <option value="ZAName">Noms de Z à A</option>
             </select>
@@ -27,12 +28,13 @@ export default {
     recipeSortType : String,
   },
   methods: {
-    //getter to use the paraleter in the recipe-gallery component
+    //getter to use the parameter in the recipe-gallery component
     emitModifyRecipeSortType : function(event) {
-      this.$emit("emitedRecipeSortType",event.target.recipeSortType)
+      this.$emit("emitedRecipeSortType",event.target.value)
+      console.log(event.target.value)
     },
     emitModifySearch : function(event) {
-      this.$emit("emitedSearch",event.target.value) //add a prop in add
+      this.$emit("emitedSearch",event.target.value)
     },
     emitCleanSearch : function() {
         this.$emit("emitedSearch","");
