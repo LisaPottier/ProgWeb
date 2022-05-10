@@ -102,7 +102,9 @@
 
   <style>
   html,body {
-    background-color: #ffd085;
+    background: no-repeat url("./assets/Bandeau.png"), #ffd085;
+    background-size: 100vw 20vh;
+    background-position: top;
     margin: 0;
     padding: 0;
     width : 100%;

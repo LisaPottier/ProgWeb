@@ -17,6 +17,6 @@
         margin : 0 auto;
     } 
     .visual {
-        width: 20%;
+        width: 50%;
     }
 </style>

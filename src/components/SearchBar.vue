@@ -54,13 +54,10 @@ export default {
 }
 #gallery-option {
   width:100%;
-  height: 100px;
-  background: no-repeat url("../assets/Bandeau.png") ;
-  background-size:cover;
   display: flex;
   flex-direction: row;
-  align-content: center;
-  background-position: bottom;
+  align-items: center;
+  padding : 3%;
 }
 .search-bar{
   height:20px;
