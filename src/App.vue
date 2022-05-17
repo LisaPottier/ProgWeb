@@ -102,13 +102,16 @@
 
   <style>
   html,body {
-    background: no-repeat url("./assets/Bandeau.png"), #ffd085;
-    background-size: 100vw 20vh;
-    background-position: top;
     margin: 0;
     padding: 0;
     width : 100%;
     height: 100%;
+  }
+  body {
+    background: no-repeat url("./assets/Bandeau.png"), #ffd085;
+    background-size: 100vw 20vh;
+    background-position: top;
+    font-size: 15px;
   }
 
   #recipes-gallery {
@@ -117,6 +120,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    width: 100%;
   }
   .gallery {
     display: flex;
@@ -124,5 +128,16 @@
     flex-wrap: wrap;
     width: 100%;
   }
+
+  @media (max-width: 575.98px)
+{
+    .gallery {
+    flex-direction: column;
+  }
+    body {
+    background-size: contain;
+    font-size : 10px;
+    }
+}
 
 </style>

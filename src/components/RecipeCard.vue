@@ -45,11 +45,21 @@ export default {
 
 <style scoped>
 .recipe-card{
-  width: 35vw;
-  margin: 5vw;
+  width: calc(50% - 5%);
+  margin : 2.5%;
 }
 .recipe-card img{
    object-fit: cover;
    width: 80%;
+}
+
+  @media (max-width: 575.98px)
+{
+   .recipe-card{
+  box-sizing: border-box;
+  width: 100%;
+  margin : 0;
+  padding : 15px;
+}
 }
 </style>

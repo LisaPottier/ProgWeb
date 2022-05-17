@@ -9,7 +9,7 @@
             </select>
         </div>
         <div class = "search-bar">
-            <input v-on:keydown.enter="emitModifySearch" type="text" 
+            <input v-on:keydown.enter="emitModifySearch" type="text" id="searchInput"
                 :value="search" 
                 placeholder="Chercher une recette">
             <button v-if="search" v-on:click="emitCleanSearch">
@@ -57,14 +57,32 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-sizing: border-box;
   padding : 3%;
 }
 .search-bar{
   height:20px;
   display: flex;
   flex-direction: row;
-  margin-left: 20px;
-  margin-right: 20px ;
+  margin: 0 20px;
   align-content: center;
+}
+
+@media (max-width: 575.98px)
+{
+  #gallery-option{
+    flex-direction: column;
+    width: 100%;
+  }
+  .search-bar{
+    width: 100%;
+    box-sizing: border-box;
+    margin: 10px 0;
+    padding : 0px 20px ;
+  }
+  #searchInput{
+    width:100%;
+  }
+
 }
 </style>
