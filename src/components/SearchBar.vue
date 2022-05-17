@@ -83,6 +83,5 @@ export default {
   #searchInput{
     width:100%;
   }
-
 }
 </style>

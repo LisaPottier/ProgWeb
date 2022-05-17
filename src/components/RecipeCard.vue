@@ -1,14 +1,25 @@
 <template>
   <div class="recipe-card">
-    <img class="picture" v-bind:src="pictureUrl"/> 
-    <h2 class="name">{{name}}</h2>
-    <RecipeInformations :id="id"/>  
+    <div class="resume" v-if="isDetailsOn==false" v-on:click="updateDetail">
+      <img class="picture" v-bind:src="pictureUrl"/> 
+      <h2 class="name">{{name}}</h2> 
+    </div>
+    <div class ="details" v-else>
+      <RecipeInformations 
+              :id="id"
+              :cuisine="cuisine"
+              :diet="diet"
+              :time="time"
+              :ingredients="ingredients"/> 
+      <button v-on:click="updateDetail">
+          <img src="../assets/close.png"/>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-import { getRecipeInfoById } from '../services/api/spoonicularAPI';
-import { getIngredientsById } from '../services/api/spoonicularAPI';
+
 import RecipeInformations from './RecipeInformations.vue'
 
 export default {
@@ -20,24 +31,26 @@ export default {
 		name: {type: String, required:true},
 		pictureUrl: {type: String, default:require("../assets/image-coming-soon.jpg")},
     id : {required:true},
+    cuisine : String, 
+    diet : String,
+    time : String,
+    ingredients : [],
 	},
   data() {
     return {
-      ingredientsData: [],
-      recipeInfoData: [],
+      isDetailsOn: false,
     }
   },
   created: function(){
-    this.retrieveRecipeInfoData(this.id);//654959 (essaie)
   },
   methods: {
-      async retrieveRecipeInfoData(recipeId) {
-              this.recipeInfoData = await getRecipeInfoById(recipeId);
-              console.log(this.recipeInfoData)
-      },
-      async retrieveIngredientsData(recipeId) {
-              this.ingredientData = await getIngredientsById(recipeId);
-              console.log(this.ingredientData)
+      updateDetail(){
+        if(this.isDetailsOn==false){
+          this.isDetailsOn=true
+        }
+        else{
+          this.isDetailsOn=false
+        }
       }
   },
 }

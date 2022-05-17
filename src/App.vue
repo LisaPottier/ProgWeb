@@ -13,9 +13,15 @@
       <RecipeCard
         v-for="recipe in sortRecipeData"
           :key="recipe.id"
+          
           :name="recipe.title"
           :pictureUrl="recipe.image"
           :id="recipe.id"
+
+          :cuisine="recipe.cuisine"
+          :diet="recipe.diet"
+          :time="recipe.time"
+          :ingredients="recipe.ingredients"
           />
           
     </div>
@@ -23,6 +29,7 @@
 </template>
 
 <script>
+  import { getRecipeInfoById } from './services/api/spoonicularAPI'
   import RecipeCard from './components/RecipeCard.vue'
   import OptionGallery from './components/SearchBar.vue'
   import ErrorMessage from './components/ErrorMessage.vue'
@@ -36,8 +43,8 @@
     },
 
     components: {
-      RecipeCard,
       OptionGallery,
+      RecipeCard,
       ErrorMessage
       },
 
@@ -87,6 +94,7 @@
                 alert("Trop de requêtes")
               }       
             },
+
             retrieveSortedData(newSortType){
               this.recipesData = this.sortRecipeData;
               this.sortType=newSortType;
@@ -96,6 +104,11 @@
               this.search=name
               console.log(this.search)
             }, 
+
+            async retrieveRecipeInfo(recipeId) {
+              this.recipeInfoData = await getRecipeInfoById(recipeId);
+              console.log(this.recipeInfoData)
+            },
     }
   }
   </script>
