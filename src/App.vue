@@ -11,25 +11,16 @@
     <div class="gallery">
       <ErrorMessage v-if="sortRecipeData.length==0"/>
       <RecipeCard
-        v-for="recipe in sortRecipeData"
-          :key="recipe.id"
-          
+        v-for="recipe in sortRecipeData" :key="recipe.id"
           :name="recipe.title"
           :pictureUrl="recipe.image"
           :id="recipe.id"
-
-          :cuisine="recipe.cuisine"
-          :diet="recipe.diet"
-          :time="recipe.time"
-          :ingredients="recipe.ingredients"
-          />
-          
+      />      
     </div>
   </div>
 </template>
 
 <script>
-  import { getRecipeInfoById } from './services/api/spoonicularAPI'
   import RecipeCard from './components/RecipeCard.vue'
   import OptionGallery from './components/SearchBar.vue'
   import ErrorMessage from './components/ErrorMessage.vue'
@@ -89,7 +80,6 @@
                 console.log("recipe name is ..."+ recipeName)
                 this.recipesData = await getRecipeDataByName(recipeName);
                 this.search=recipeName;
-                
               } catch (error) {
                 alert("Trop de requêtes")
               }       
@@ -98,17 +88,7 @@
             retrieveSortedData(newSortType){
               this.recipesData = this.sortRecipeData;
               this.sortType=newSortType;
-            },
-
-            displaySearchedRecipes : function(name) {
-              this.search=name
-              console.log(this.search)
-            }, 
-
-            async retrieveRecipeInfo(recipeId) {
-              this.recipeInfoData = await getRecipeInfoById(recipeId);
-              console.log(this.recipeInfoData)
-            },
+            },      
     }
   }
   </script>

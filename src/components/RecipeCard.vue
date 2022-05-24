@@ -1,16 +1,16 @@
 <template>
-  <div class="recipe-card">
+  <div class="recipe-card" @mouseover="upHere = true" @mouseleave="upHere = false" >
     <div class="resume" v-if="isDetailsOn==false" v-on:click="updateDetail">
       <img class="picture" v-bind:src="pictureUrl"/> 
       <h2 class="name">{{name}}</h2> 
+      <h2 v-show="upHere" class="message-click">Click to see the details</h2>
     </div>
+    
     <div class ="details" v-else>
-      <RecipeInformations 
-              :id="id"
-              :cuisine="cuisine"
-              :diet="diet"
-              :time="time"
-              :ingredients="ingredients"/> 
+      <RecipeInformations
+              :id="this.id"
+              :name="this.name"
+      />
       <button v-on:click="updateDetail">
           <img src="../assets/close.png"/>
       </button>
@@ -27,6 +27,7 @@ export default {
   components:{
     RecipeInformations,
   },
+
 	props: {
 		name: {type: String, required:true},
 		pictureUrl: {type: String, default:require("../assets/image-coming-soon.jpg")},
@@ -36,9 +37,11 @@ export default {
     time : String,
     ingredients : [],
 	},
+
   data() {
     return {
       isDetailsOn: false,
+      upHere : false,
     }
   },
   created: function(){
@@ -51,7 +54,7 @@ export default {
         else{
           this.isDetailsOn=false
         }
-      }
+      },
   },
 }
 </script>
@@ -65,10 +68,32 @@ export default {
    object-fit: cover;
    width: 80%;
 }
+.details img{
+  height: 20px;
+  width: 20px;
+}
+.details button{
+  background-color:transparent ;
+  border: none;
+}
+.details{
+  box-sizing: border-box;
+  padding: 10px;
+  background:orange ;
+}
+.message-click{
+  width: 50%;
+  size:7px;
+  color:white;
+  background-color:rgba(0, 0, 0, 0.434);
+  position:relative;
+  top:-200px;
+  left:22.5%;
+}
 
   @media (max-width: 575.98px)
 {
-   .recipe-card{
+.recipe-card{
   box-sizing: border-box;
   width: 100%;
   margin : 0;

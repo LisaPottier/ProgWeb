@@ -70,6 +70,11 @@ export default {
 
 @media (max-width: 575.98px)
 {
+  .search-bar img{
+    height: 20px;
+    width: 20px;
+}
+  
   #gallery-option{
     flex-direction: column;
     width: 100%;
