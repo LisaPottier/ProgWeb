@@ -2,8 +2,12 @@
   <div class="recipe-card" @mouseover="upHere = true" @mouseleave="upHere = false" >
     <div class="resume" v-if="isDetailsOn==false" v-on:click="updateDetail">
       <img class="picture" v-bind:src="pictureUrl"/> 
-      <h2 class="name">{{name}}</h2> 
-      <h2 v-show="upHere" class="message-click">Click to see the details</h2>
+      <h2 class="name">
+        {{name}}
+      </h2> 
+      <h2 v-show="upHere" class="message-click">
+        Click to see the details
+      </h2>
     </div>
     
     <div class ="details" v-else>
@@ -66,7 +70,7 @@ export default {
 }
 .recipe-card img{
    object-fit: cover;
-   width: 80%;
+   width: 100%;
 }
 .details img{
   height: 20px;
@@ -76,28 +80,41 @@ export default {
   background-color:transparent ;
   border: none;
 }
+.resume name {
+  margin: 2px;
+}
 .details{
   box-sizing: border-box;
   padding: 10px;
   background:orange ;
 }
+.resume {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width:100%;
+  box-sizing: border-box;
+}
+
 .message-click{
-  width: 50%;
-  size:7px;
+  position: absolute;
+  width:45%;
   color:white;
   background-color:rgba(0, 0, 0, 0.434);
-  position:relative;
-  top:-200px;
-  left:22.5%;
 }
 
   @media (max-width: 575.98px)
 {
 .recipe-card{
-  box-sizing: border-box;
   width: 100%;
+}
+.message-click{
+  width:100%;
+}
+
+.recipe-card{
   margin : 0;
-  padding : 15px;
 }
 }
 </style>

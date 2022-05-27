@@ -1,17 +1,17 @@
 <template>
     <div id="gallery-option">
         <div class ="sort-type-selection">
-            <label for="recipe-sort"> Trier par : </label>
+            <label for="recipe-sort"> Sort by : </label>
             <select v-on:change="emitModifySortType" 
               :value="sortType">
-                <option value="AZName">Noms de A à Z</option>
-                <option value="ZAName">Noms de Z à A</option>
+                <option value="AZName">Name(A to Z)</option>
+                <option value="ZAName">Name(Z to A)</option>
             </select>
         </div>
         <div class = "search-bar">
             <input v-on:keydown.enter="emitModifySearch" type="text" id="searchInput"
                 :value="search" 
-                placeholder="Chercher une recette">
+                placeholder="Search a recipe">
             <button v-if="search" v-on:click="emitCleanSearch">
                 <img src="../assets/close.png"/>
             </button>
@@ -58,7 +58,10 @@ export default {
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
-  padding : 3%;
+  padding : 2%;
+}
+.sort-type-selection{
+  width: 200px;
 }
 .search-bar{
   height:20px;
@@ -66,6 +69,14 @@ export default {
   flex-direction: row;
   margin: 0 20px;
   align-content: center;
+}
+@media (max-width: 800px){
+  #gallery-option {
+    flex-direction: column;
+  }
+  .search-bar {
+    margin: 10px;
+  }
 }
 
 @media (max-width: 575.98px)
@@ -83,7 +94,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
     margin: 10px 0;
-    padding : 0px 20px ;
+    padding : 0px 15px ;
   }
   #searchInput{
     width:100%;

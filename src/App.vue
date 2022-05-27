@@ -1,12 +1,17 @@
 <template>
   <div id="recipes-gallery">
-    <div class="gallery-options">
-      <OptionGallery 
-        :search = "search"
-            v-on:emitedSearch = "retrieveRecipeSearch"
-        :sortType = "sortType"
-            v-on:emitedSortType = "retrieveSortedData"
-      />
+    <div class="header">
+      <div class="yummImac-visual">
+        <img src="./assets/yummImac.png">
+      </div>
+      <div class="gallery-options">
+        <OptionGallery 
+          :search = "search"
+              v-on:emitedSearch = "retrieveRecipeSearch"
+          :sortType = "sortType"
+              v-on:emitedSortType = "retrieveSortedData"
+        />
+      </div>
     </div>
     <div class="gallery">
       <ErrorMessage v-if="sortRecipeData.length==0"/>
@@ -81,7 +86,7 @@
                 this.recipesData = await getRecipeDataByName(recipeName);
                 this.search=recipeName;
               } catch (error) {
-                alert("Trop de requêtes")
+                alert("Too many request")
               }       
             },
 
@@ -112,7 +117,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: black;
     width: 100%;
   }
   .gallery {
@@ -121,12 +126,37 @@
     flex-wrap: wrap;
     width: 100%;
   }
+  .header{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    padding : 2%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+  }
+  .yummImac-visual img{
+    width: 100%;
+  }
+  .yummImac-visual{
+    width: 300px;
+    margin:0 20px;
+  }
+  .gallery-options{
+    width:auto;
+  }
+  @media (max-width: 800px){
+    
+
+  }
 
   @media (max-width: 575.98px)
 {
-    .gallery {
+  .header{
     flex-direction: column;
+    align-items: center;
   }
+
     body {
     background-size: contain;
     font-size : 10px;

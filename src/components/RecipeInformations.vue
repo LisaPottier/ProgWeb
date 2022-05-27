@@ -1,17 +1,15 @@
 <template>
   <div class="recipe-details">
     <h1 class="name" > {{name}}</h1>
-    <h2 class ="diet" v-if="recipeInfoData.vegetarian==true" > vegetarian</h2>
-    <h2 class ="time" > temps de préparation : {{recipeInfoData.readyInMinutes}} min</h2>
+    <h2 class ="diet" v-if="recipeInfoData.vegetarian==true" > vegetarian </h2>
+    <h2 class ="time" > cooking time : {{recipeInfoData.readyInMinutes}} min</h2>
     <div class="ingredients-list">
       <h2> ingredients </h2>
       <p v-for="ingredient in recipeInfoData.extendedIngredients" :key="ingredient.id">
-          {{ingredient.name}}
+          {{ingredient.amount}} {{ingredient.unit}} of {{ingredient.name}} 
       </p> 
     </div>
-
   </div>
-  
 </template>
 
 <script>
@@ -30,6 +28,7 @@ export default {
 
   created: function(){
       this.retrieveRecipeInfo(this.id);
+      console.log(this.id)
     },
 
   data() {
